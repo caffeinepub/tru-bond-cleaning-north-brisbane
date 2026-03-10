@@ -1,0 +1,122 @@
+@font-face {
+  font-family: "Cabinet Grotesk";
+  src: url("/assets/fonts/CabinetGrotesk-Variable.woff2") format("woff2");
+  font-weight: 100 900;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "General Sans";
+  src: url("/assets/fonts/GeneralSans-Variable.woff2") format("woff2");
+  font-weight: 200 700;
+  font-style: normal;
+  font-display: swap;
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    /* Deep navy primary, crisp white background, teal accent */
+    --background: 0.98 0.005 255;
+    --foreground: 0.18 0.04 258;
+
+    --card: 1 0 0;
+    --card-foreground: 0.18 0.04 258;
+
+    --popover: 1 0 0;
+    --popover-foreground: 0.18 0.04 258;
+
+    /* Deep navy blue */
+    --primary: 0.3 0.13 258;
+    --primary-foreground: 1 0 0;
+
+    /* Light blue */
+    --secondary: 0.93 0.04 240;
+    --secondary-foreground: 0.25 0.1 258;
+
+    --muted: 0.94 0.02 240;
+    --muted-foreground: 0.52 0.06 248;
+
+    /* Teal/sky accent for CTAs */
+    --accent: 0.58 0.18 210;
+    --accent-foreground: 1 0 0;
+
+    --destructive: 0.55 0.22 27;
+    --destructive-foreground: 1 0 0;
+
+    --border: 0.88 0.03 248;
+    --input: 0.88 0.03 248;
+    --ring: 0.3 0.13 258;
+
+    --radius: 0.5rem;
+
+    --chart-1: 0.6 0.17 260;
+    --chart-2: 0.55 0.18 210;
+    --chart-3: 0.65 0.16 165;
+    --chart-4: 0.7 0.18 50;
+    --chart-5: 0.55 0.2 30;
+
+    --sidebar: 0.18 0.06 258;
+    --sidebar-foreground: 0.95 0.02 240;
+    --sidebar-primary: 0.58 0.18 210;
+    --sidebar-primary-foreground: 1 0 0;
+    --sidebar-accent: 0.25 0.08 258;
+    --sidebar-accent-foreground: 0.95 0.02 240;
+    --sidebar-border: 0.28 0.08 258;
+    --sidebar-ring: 0.58 0.18 210;
+  }
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply bg-background text-foreground font-body;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    @apply font-display;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .hero-gradient {
+    background: linear-gradient(
+      to right,
+      oklch(0.18 0.08 258 / 0.92) 0%,
+      oklch(0.25 0.1 248 / 0.75) 60%,
+      oklch(0.3 0.1 240 / 0.3) 100%
+    );
+  }
+
+  .section-gradient {
+    background: linear-gradient(
+      135deg,
+      oklch(0.97 0.01 248) 0%,
+      oklch(0.95 0.03 240) 100%
+    );
+  }
+
+  .trust-badge {
+    @apply inline-flex items-center gap-2 px-4 py-2 rounded-full text-sm font-semibold;
+    background: oklch(0.95 0.04 220 / 1);
+    color: oklch(0.28 0.13 250);
+  }
+}
