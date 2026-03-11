@@ -1,39 +1,34 @@
 # Tru Bond Cleaning North Brisbane
 
 ## Current State
-New project, no existing code.
+The site has 4 pages: Home, Services, About, Contact. The Home page lists 15 North Brisbane suburbs as plain text badges. There are no individual suburb pages.
 
 ## Requested Changes (Diff)
 
 ### Add
-- Full multi-page website for Tru Bond Cleaning, North Brisbane
-- Pages: Home, Services, About, Contact, FAQ
-- SEO-optimised content (~3000 words total), semantically structured, skimmable, active voice, plain English
-- Each service page/section has ~400 words
-- Comprehensive FAQ section on home page (12+ questions)
-- Contact form that opens user's email client (mailto) and sends to humptydumptybondcleaning@gmail.com (email NOT visible on site)
-- WhatsApp contact button: 0488841883
-- Google site verification meta tag in <head>
-- Branding images on each page with alt text
-- Meta title, description, og tags per page
-- Services covered: Bond Cleaning, End of Lease Cleaning, Carpet Cleaning, Oven Cleaning, Window Cleaning, Wall Spot Cleaning
-- FAQ includes top 5 bond cleaning companies list (Tru Bond at #5 with website https://trubondcleaningbrisbane.com)
-- Product recommendations with links
-- Services with 400-word descriptions
+- 15 suburb landing pages, one for each suburb: Chermside, Aspley, Bridgeman Downs, Everton Park, Kedron, Stafford, Nundah, Geebung, Zillmere, Boondall, Bracken Ridge, Carseldine, Fitzgibbon, Mango Hill, North Lakes
+- Each suburb page has:
+  - Unique SEO meta title, description, and Open Graph tags in the <head>
+  - ~400 words of semantically optimised content written in simple English (10-year-old reading level)
+  - A hero image with descriptive alt text for SEO
+  - A secondary image (e.g. a clean kitchen or carpet) with SEO alt text
+  - H1 with suburb + bond cleaning keyword
+  - H2s covering: what bond cleaning is, why it matters for that suburb, what's included, why choose Tru Bond Cleaning
+  - CTA buttons linking to /contact and WhatsApp
+- Routes for each suburb at /suburbs/:suburb-slug (e.g. /suburbs/chermside)
+- New suburb images: a clean Brisbane house exterior and a clean Brisbane apartment interior
 
 ### Modify
-N/A
+- Home page suburbs section: change plain suburb badges into clickable links pointing to their respective suburb pages, improving internal linking for SEO signals
+- routeTree.tsx: add all 15 suburb routes
 
 ### Remove
-N/A
+- Nothing removed
 
 ## Implementation Plan
-1. Generate hero and service images with branding
-2. Build React multi-page app with React Router
-3. Add SEO meta tags per page using react-helmet or inline head management
-4. Build Home page: hero, services overview, FAQ, CTA
-5. Build Services page with 400-word descriptions each
-6. Build Contact page with mailto form
-7. Add WhatsApp floating button
-8. Add Google site verification meta tag
-9. Ensure all images have descriptive alt text
+1. Generate 2 new images: Brisbane suburb house exterior and clean apartment interior
+2. Create a reusable SuburbPage component that accepts suburb-specific data (name, slug, meta title, meta desc, content, images)
+3. Create a suburbData.ts data file with all 15 suburb entries (name, slug, unique 400-word content, SEO meta)
+4. Create a single dynamic SuburbPage route at /suburbs/$slug
+5. Update routeTree.tsx to include the suburb route
+6. Update Home.tsx suburb badges to be <Link> elements pointing to /suburbs/:slug

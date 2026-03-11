@@ -11,6 +11,7 @@ import { Link } from "@tanstack/react-router";
 import { ArrowRight, CheckCircle2, Phone, Sparkles, Star } from "lucide-react";
 import { useEffect } from "react";
 import { SiWhatsapp } from "react-icons/si";
+import { suburbs as suburbData } from "./suburbData";
 
 function useMetaTags(title: string, description: string) {
   useEffect(() => {
@@ -118,24 +119,6 @@ const faqs = [
     q: "How much is an end of lease clean in Australia? How much to pay a cleaner for 3 hours? What is the 20 minute rule in cleaning?",
     a: "End of lease cleaning costs in Australia range from $200 for a small studio to over $1,000 for a large house. The average for a 3-bedroom house is around $400 to $600. For a 3-hour clean from a general cleaner, you would typically pay $105 to $165 based on Brisbane rates ($35 to $55 per hour). The 20-minute rule in cleaning is a popular productivity tip — the idea is to focus on one area for just 20 minutes at a time. It makes cleaning feel less overwhelming and keeps you moving through the house systematically. However, for a bond clean, you need much more than 20-minute bursts — a full professional bond clean of a 3-bedroom house typically takes 6 to 10 hours with a team of 2 to 3 cleaners.",
   },
-];
-
-const suburbs = [
-  "Chermside",
-  "Aspley",
-  "Bridgeman Downs",
-  "Everton Park",
-  "Kedron",
-  "Stafford",
-  "Nundah",
-  "Geebung",
-  "Zillmere",
-  "Boondall",
-  "Bracken Ridge",
-  "Carseldine",
-  "Fitzgibbon",
-  "Mango Hill",
-  "North Lakes",
 ];
 
 export default function Home() {
@@ -326,26 +309,32 @@ export default function Home() {
       </section>
 
       {/* SUBURBS */}
-      <section className="py-16 bg-white" aria-labelledby="suburbs-heading">
+      <section
+        className="py-16 bg-white"
+        aria-labelledby="suburbs-heading"
+        data-ocid="suburbs.section"
+      >
         <div className="container mx-auto px-4 text-center">
           <h2
             id="suburbs-heading"
-            className="font-display text-2xl sm:text-3xl font-black text-foreground mb-4"
+            className="font-display text-2xl sm:text-3xl font-black text-foreground mb-3"
           >
             We Service All North Brisbane Suburbs
           </h2>
           <p className="text-muted-foreground mb-8">
-            Bond cleaning services available across all North Brisbane
-            postcodes.
+            Click your suburb to learn more about bond cleaning in your area.
           </p>
           <div className="flex flex-wrap justify-center gap-2">
-            {suburbs.map((suburb) => (
-              <span
-                key={suburb}
-                className="px-3 py-1.5 bg-secondary text-secondary-foreground text-sm font-medium rounded-full"
+            {suburbData.map((suburb, i) => (
+              <Link
+                key={suburb.slug}
+                to="/suburbs/$slug"
+                params={{ slug: suburb.slug }}
+                className="px-3 py-1.5 bg-secondary text-secondary-foreground text-sm font-medium rounded-full hover:bg-primary hover:text-primary-foreground transition-colors"
+                data-ocid={`suburbs.item.${i + 1}`}
               >
-                {suburb}
-              </span>
+                {suburb.name}
+              </Link>
             ))}
           </div>
         </div>

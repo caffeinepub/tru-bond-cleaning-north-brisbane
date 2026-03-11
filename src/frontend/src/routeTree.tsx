@@ -11,6 +11,7 @@ import About from "./pages/About";
 import Contact from "./pages/Contact";
 import Home from "./pages/Home";
 import Services from "./pages/Services";
+import SuburbPage from "./pages/SuburbPage";
 
 const rootRoute = createRootRoute({
   component: () => (
@@ -49,11 +50,18 @@ const contactRoute = createRoute({
   component: Contact,
 });
 
+const suburbRoute = createRoute({
+  getParentRoute: () => rootRoute,
+  path: "/suburbs/$slug",
+  component: SuburbPage,
+});
+
 export const routeTree = rootRoute.addChildren([
   homeRoute,
   servicesRoute,
   aboutRoute,
   contactRoute,
+  suburbRoute,
 ]);
 
 export const router = createRouter({ routeTree });
