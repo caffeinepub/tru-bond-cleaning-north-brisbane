@@ -1,7 +1,8 @@
 import TrustBadges from "@/components/TrustBadges";
 import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
 import { Link } from "@tanstack/react-router";
-import { ArrowRight, CheckCircle2 } from "lucide-react";
+import { ArrowRight, CheckCircle2, ShieldCheck, Star } from "lucide-react";
 import { useEffect } from "react";
 
 function useMetaTags(title: string, description: string) {
@@ -9,6 +10,20 @@ function useMetaTags(title: string, description: string) {
     document.title = title;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", description);
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement("meta");
+      (ogTitle as HTMLMetaElement).setAttribute("property", "og:title");
+      document.head.appendChild(ogTitle);
+    }
+    ogTitle.setAttribute("content", title);
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement("meta");
+      (ogDesc as HTMLMetaElement).setAttribute("property", "og:description");
+      document.head.appendChild(ogDesc);
+    }
+    ogDesc.setAttribute("content", description);
   }, [title, description]);
 }
 
@@ -18,155 +33,156 @@ const services = [
     title: "Bond Cleaning (End of Lease Cleaning)",
     subtitle: "The complete clean that gets your bond back",
     img: "/assets/generated/service-end-of-lease.dim_600x400.jpg",
-    alt: "Professional bond cleaners doing end of lease clean in North Brisbane rental property",
+    alt: "Professional bond cleaners completing end of lease clean in a North Brisbane rental property following the REIQ checklist",
     highlights: [
       "Full REIQ checklist clean",
       "Kitchen, bathrooms, bedrooms, living areas",
       "Floors vacuumed and mopped",
       "Bond back guarantee included",
     ],
-    content: `Moving out is stressful. You pack boxes, organise trucks, deal with utilities — and on top of all that, you need the property to be spotless. That's where Tru Bond Cleaning comes in. We take the cleaning stress off your plate completely.
+    content: `Moving out is stressful. You're packing boxes, organising removalists, chasing utilities — and on top of all that, the property has to be spotless. That's where Tru Bond Cleaning steps in.
 
-Our bond cleaning service covers every single part of your rental property — from the kitchen benchtops to the bathroom grout, from the skirting boards to the light switches. We follow the Real Estate Institute of Queensland (REIQ) standard checklist, which is exactly what your property manager uses. That means nothing gets missed.
+Our bond cleaning service covers every single item on the REIQ checklist — the official standard used by Queensland property managers at final inspection. We've completed over 500 bond cleans across North Brisbane, and we know exactly what gets flagged.
 
-Here's what we clean:
+**What's included in every bond clean:**
 
-• Kitchen — oven inside and out, rangehood, stovetop, cupboard fronts and insides, benchtops, splashback, sink and taps.
-• Bathrooms — toilet, shower screen, bath, tiles, grout, vanity, mirrors, exhaust fans.
-• Bedrooms and living areas — walls spot cleaned, light fittings, ceiling fans, windowsills, tracks, and frames.
-• Floors — vacuumed and mopped throughout.
-• Laundry — trough, cupboards, washing machine area.
-• Garage — swept and wiped down.
+• Kitchen — oven inside and out, rangehood and filters, stovetop, all cupboard interiors and fronts, benchtops, splashback, sink and taps
+• Bathrooms — toilet (full disassembly), shower screen, bath, tiles, grout lines, vanity, mirrors, exhaust fans
+• Bedrooms and living areas — ceiling fans, light fittings, wall spot cleaning, windowsills, blinds wipe-down
+• Floors — vacuumed and mopped throughout, including under furniture
+• Windows — glass cleaned inside and out, frames, sills, and tracks
+• Laundry — trough, shelving, washing machine area
+• Garage — swept, wiped, cobwebs removed
 
-We bring all our own equipment and eco-friendly cleaning products. You don't need to supply a thing. Our team works quickly and thoroughly — most jobs are done in a single day.
+We bring every piece of equipment we need. You don't supply a thing. Our team is police-checked, fully insured, and trained specifically to the REIQ standard.
 
-We also offer a bond back guarantee. If your property manager raises a concern, we come back and fix it at no extra cost. That's our promise to you.
+Our bond back guarantee means if your property manager raises any concerns after inspection, we return within 48 hours and fix it at zero additional cost. This guarantee has never been turned away — not once.
 
-We know how important your bond money is. For most renters in North Brisbane, that's thousands of dollars. We treat every job like it's our own home. Our cleaners are trained, police-checked, and fully insured.
-
-Book online today and get your free quote in minutes. We service all suburbs in North Brisbane including Chermside, Aspley, Bridgeman Downs, Everton Park, Kedron, Stafford, and more.`,
+For most North Brisbane renters, a bond deposit is four weeks' rent — often $2,000 to $4,000. Protecting that money with a professional clean is one of the smartest decisions you can make when moving out. Book Tru Bond Cleaning today.`,
   },
   {
     id: "carpet-cleaning",
     title: "Carpet Steam Cleaning",
     subtitle: "Deep clean that passes every inspection",
-    img: "/assets/generated/service-carpet-cleaning.dim_600x400.jpg",
-    alt: "Professional carpet steam cleaning in North Brisbane home",
+    img: "/assets/generated/service-carpet-steam.dim_600x400.jpg",
+    alt: "Tru Bond Cleaning professional using industrial hot water extraction machine to steam clean carpet in a North Brisbane rental property",
     highlights: [
       "Industrial hot water extraction",
       "Pre-treatment for tough stains",
       "All carpet types including wool",
       "Dries in 2–4 hours",
     ],
-    content: `Carpets hold onto everything — dust, pet hair, food crumbs, and odours. By the time you're moving out, your carpets have seen a lot. A quick vacuum won't cut it. Property managers check carpets closely, and stained or smelly carpets are one of the most common reasons bond money is withheld.
+    content: `Carpets hold on to everything — pet hair, dust, food odours, old stains, and deep-seated dirt that a standard vacuum never reaches. By the time you move out, your carpets have taken years of foot traffic. Property managers inspect them closely, and dirty or smelly carpets are one of the most common reasons bond money gets withheld.
 
-Tru Bond Cleaning uses industrial-grade hot water extraction machines — the same type used by professional carpet cleaners. This method pushes hot steam deep into the carpet fibres, loosening dirt, killing bacteria, and pulling everything out. The result is a carpet that looks and smells fresh.
+Tru Bond Cleaning uses industrial-grade hot water extraction machines — the same professional standard used by commercial carpet cleaners. We push hot pressurised water deep into the fibres, break down the soil and bacteria, and extract it all out. The result is a carpet that looks, feels, and smells genuinely fresh.
 
-We treat stains before steaming — whether it's red wine, pet accidents, coffee, or mud. Our pre-treatment products break down the stain so the steam clean can lift it right out. Most stains come out completely. Some older, set-in stains may lighten but not disappear entirely — we'll always be honest with you about what to expect.
+**How we clean carpets:**
 
-Our carpet cleaning is included as part of our full bond clean package, or you can book it separately. We carry our own machines and products, so you don't need to hire anything yourself.
+1. Pre-inspection — We check each carpet area and note any stains or high-traffic zones
+2. Pre-treatment — We apply targeted pre-spray to break down stains before steaming
+3. Hot water extraction — Our industrial machines deep clean the full carpet area
+4. Post-inspection — We check everything has come up to standard
 
-After cleaning, we recommend keeping windows open to let the carpets dry quickly — usually within 2 to 4 hours.
+Most stains come out completely. Some older, set-in stains may lighten significantly but not disappear entirely. We'll always be honest with you about expectations before we start.
 
-We service all carpet types including wool, nylon, polyester, and blended fibres. Whether you have a single bedroom unit or a five-bedroom family home, we have the equipment and team size to handle it.
+Carpet steam cleaning is included in our full bond clean package, or you can book it separately. We cover all carpet types including wool, nylon, polyester, and blended fibres. Typical drying time is 2 to 4 hours with ventilation.
 
-Carpets that pass property manager inspection means you're one step closer to getting your full bond back. Book Tru Bond Cleaning for carpet steam cleaning in North Brisbane today.`,
+Don't risk your bond on a rented machine from a supermarket — those machines use low pressure and rarely achieve the clean standard required for inspection. Our professional equipment does the job properly, the first time.`,
   },
   {
     id: "oven-kitchen",
     title: "Oven & Kitchen Deep Clean",
     subtitle: "Inspection-ready kitchen every time",
-    img: "/assets/generated/service-oven-cleaning.dim_600x400.jpg",
-    alt: "Deep cleaned sparkling oven in Brisbane rental property kitchen",
+    img: "/assets/generated/service-kitchen-clean.dim_600x400.jpg",
+    alt: "Spotless gleaming kitchen after professional oven and kitchen deep clean by Tru Bond Cleaning North Brisbane",
     highlights: [
       "Oven interior, racks, and glass door",
       "Rangehood filters and exhaust",
       "Cupboards inside and out",
       "Food-safe professional degreasers",
     ],
-    content: `The oven is one of the hardest things to clean in any home — and it's one of the first things property managers check. Baked-on grease, burnt food, and carbon build-up don't come off with regular spray and wipe. You need the right products, the right tools, and the right technique.
+    content: `The oven is the single most-checked item on every property manager's inspection list. It's also the hardest thing to clean. Baked-on carbon, burnt food residue, and heavy grease don't come off with regular spray and wipe. You need the right degreasers, the right tools, and an experienced hand.
 
-Our kitchen deep clean includes:
+Our kitchen deep clean covers:
 
-• Oven interior (racks, glass door, cavity, seals)
-• Rangehood (filters, exterior, light covers)
-• Stovetop (all burners, grates, knobs)
-• Benchtops and splashback
-• Cupboard fronts (outside) and insides
-• Sink and taps
-• Dishwasher exterior
+• Oven interior — cavity, racks (soaked separately), glass door inside and out, oven seals
+• Rangehood — filters degreased, exterior wiped, light covers cleaned
+• Stovetop — burners, grates, knobs, drip trays
+• Benchtops and splashback — cleaned with surface-appropriate products
+• Cupboards — all fronts wiped, all interiors cleaned including shelves and drawers
+• Sink and taps — descaled and polished
+• Dishwasher exterior — wiped and cleaned
 
-We use food-safe, professional-grade degreasers that cut through grease without damaging surfaces. Our team disassembles oven racks and soaks them separately to get them truly clean. We also clean the oven glass from both sides — inside the door cavity if accessible.
+We use food-safe, professional-grade degreasers that cut through the toughest build-up without damaging surfaces. We disassemble oven components where safe to do so — racks, burner grates, rangehood filters — and clean them properly, not just wipe them down.
 
-A clean oven and kitchen is non-negotiable for bond return. Property managers know what a properly cleaned kitchen looks like, and they will note any grease or residue in their inspection report. Don't risk your bond on a rushed clean.
-
-Let Tru Bond Cleaning handle it. We've cleaned hundreds of kitchens across North Brisbane and we know exactly what standard is required.
-
-This service is included in our full bond clean package or available as a standalone booking. It's a smart investment — the cost of a professional clean is always far less than the bond deduction you'd face otherwise. Book online today and let us make your kitchen inspection-ready.`,
+A dirty kitchen is the number-one reason property managers flag issues at bond inspections. Don't lose hundreds of dollars from your bond because of a greasy oven. Let our experienced team handle it. This service is included in our full bond clean, or available as a standalone booking.`,
   },
   {
     id: "window-cleaning",
     title: "Window Cleaning",
     subtitle: "Crystal clear — inside and out",
     img: "/assets/generated/service-window-cleaning.dim_600x400.jpg",
-    alt: "Professional window cleaning service North Brisbane house exterior",
+    alt: "Professional window cleaning service by Tru Bond Cleaning leaving streak-free windows on a North Brisbane rental home",
     highlights: [
       "Inside and outside glass",
       "Frames, sills, and tracks",
       "Sliding door screens",
       "Streak-free finish guaranteed",
     ],
-    content: `Clean windows make a huge difference to how a property looks and feels. They let in more light, make rooms feel bigger, and show the property manager that the place has been well looked after. Dirty windows — with water marks, fingerprints, dust, and grime — are a clear sign that the property hasn't been cleaned thoroughly.
+    content: `Clean windows change how a property looks — they let in light, make rooms feel bigger, and signal to property managers that the home has been well cared for. Dirty windows, streaks, and grimy tracks stand out immediately at inspection.
 
-Tru Bond Cleaning cleans all windows inside and out as part of our full bond clean. We clean the glass panels, window frames, windowsills, and tracks. Tracks especially collect a lot of dust, dead insects, and debris — we remove all of it.
+Tru Bond Cleaning cleans all windows as part of our standard bond clean. Here's what that includes:
 
-For interior windows, we use microfibre cloths and streak-free window cleaner to leave the glass crystal clear. For exterior windows, we use squeegees and extension tools to reach higher panes safely. We don't use ladders without proper safety equipment. We follow all safe work practices.
+• All window glass — cleaned inside and out with streak-free solution and microfibre cloths
+• Window frames and architraves — wiped down completely
+• Windowsills — cleaned and dried
+• Window tracks — fully cleared of dust, debris, and dead insects
+• Sliding door glass and frames — treated the same as windows
+• Flyscreens — gently cleaned where accessible
 
-Window cleaning is often skipped by tenants doing their own clean — either because it's time-consuming or because they don't have the right tools. That's a mistake that often shows up in inspection reports.
+Window tracks are often overlooked by tenants doing a DIY clean — they collect dust, debris, and insect remains that are immediately noticeable on inspection. Our team cleans them thoroughly using fine brushes and appropriate cleaners.
 
-Our team cleans every window systematically — we don't rush and we don't skip. We also clean sliding door tracks and screens where present.
+For exterior windows, we use squeegees and extension poles to reach higher panes safely. All safe work practices are followed. We don't cut corners on access.
 
-Clean windows and tracks are a standard item on the REIQ bond cleaning checklist, so it's not optional. Let Tru Bond Cleaning take care of it. We're thorough, professional, and we back our work with our bond back guarantee. Book your window cleaning as part of a full bond clean or as a separate service.`,
+Clean windows are a standard REIQ checklist item. They're not optional. Let Tru Bond Cleaning take care of them as part of your full bond clean, so you can focus on your move.`,
   },
   {
     id: "wall-cleaning",
     title: "Wall Spot Cleaning",
     subtitle: "Every mark removed — walls ready for inspection",
-    img: "/assets/generated/hero-bond-cleaning.dim_1200x600.jpg",
-    alt: "Professional cleaner spot cleaning walls in North Brisbane rental property for bond inspection",
+    img: "/assets/generated/service-end-of-lease.dim_600x400.jpg",
+    alt: "Professional cleaner spot cleaning walls and skirting boards in a North Brisbane rental property for bond inspection clearance",
     highlights: [
       "Scuffs, marks, and fingerprints",
       "Pen, pencil, and crayon marks",
       "Adhesive residue removal",
       "Included in all bond cleans",
     ],
-    content: `Moving out means your walls probably have some marks on them — scuffs from furniture, crayon from the kids, smudges near light switches, or food splatter in the kitchen. Property managers inspect walls during bond inspections, and any obvious marks or stains will be noted.
+    content: `By the time you move out, your walls have a story to tell — scuffs from furniture moving, fingerprints around light switches, food splatter in the kitchen, crayon marks from little hands, adhesive residue from picture hooks and posters. Property managers check all of it.
 
-The good news is that most marks come off with the right products and technique. Tru Bond Cleaning includes wall spot cleaning in every bond clean.
+The good news: most marks come off with the right product and technique. Wall spot cleaning is included in every bond clean we do.
 
-We check every wall in every room and treat any marks we find. We use gentle but effective wall cleaners that remove marks without stripping paint. Different paint types need different approaches — flat paint is more delicate than semi-gloss, for example — and our team knows the difference. We don't just scrub blindly. We test a small area first and use the right pressure and product for the surface.
+What we remove:
 
-Common marks we remove:
+• Scuffs and scratches from furniture
+• Pen, pencil, and crayon marks
+• Fingerprints and smudges around doors and switches
+• Food splatter in kitchen and dining areas
+• Adhesive residue from tape, posters, and removable hooks
+• Crayon and marker (where paint type allows)
 
-• Scuffs and scratches
-• Pen and pencil marks
-• Food and grease splatters
-• Crayon and marker (where possible)
-• Adhesive residue from posters and hooks
-• Fingerprints around door frames and light switches
+We also clean all door frames, architraves, and skirting boards as part of this process.
 
-We also clean door frames, architraves, and skirting boards as part of this process.
+Different paint finishes require different approaches. Flat/matte paint is more delicate than semi-gloss — too much pressure and you'll remove the paint with the mark. Our team knows the difference and applies the right method for each surface. We always test in an inconspicuous area first.
 
-If a wall has significant damage — holes, deep gouges, or large paint chips — that's beyond cleaning and may require a handyman or painter. We'll let you know honestly if we see something that needs professional repair.
-
-For everyday marks and smudges, we've got it covered. Wall spot cleaning is included in our full bond clean package at no extra charge.`,
+If walls have significant damage beyond cleaning — deep gouges, holes, peeling paint — that's a repair job, not a cleaning job. We'll let you know honestly if we see something that needs a handyman. For everyday marks and general wear, we've got it completely covered.`,
   },
 ];
 
 export default function Services() {
   useMetaTags(
     "Bond Cleaning Services North Brisbane | Tru Bond Cleaning",
-    "Professional bond cleaning services in North Brisbane including end of lease cleaning, carpet steam cleaning, oven deep clean, window cleaning, and wall spot cleaning. Bond back guarantee.",
+    "Professional bond cleaning services in North Brisbane: end of lease cleaning, carpet steam cleaning, oven deep clean, window cleaning, wall spot cleaning. REIQ checklist. Bond back guarantee. 500+ happy customers.",
   );
 
   return (
@@ -174,17 +190,80 @@ export default function Services() {
       {/* Page Header */}
       <section
         className="bg-primary text-primary-foreground py-16"
+        aria-label="Tru Bond Cleaning Services North Brisbane"
         data-ocid="services.section"
       >
         <div className="container mx-auto px-4 text-center">
+          <span className="inline-block bg-white/20 text-white text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+            What We Do
+          </span>
           <h1 className="font-display text-4xl sm:text-5xl font-black mb-4">
-            Our Bond Cleaning Services
+            Bond Cleaning Services in North Brisbane
           </h1>
           <p className="text-primary-foreground/80 text-lg max-w-2xl mx-auto mb-8">
-            Every service is designed to meet the REIQ standard — the same
-            checklist your property manager uses. Nothing gets missed.
+            Every service follows the REIQ standard — the same checklist your
+            property manager uses. Nothing gets missed. Everything is backed by
+            our bond back guarantee.
           </p>
           <TrustBadges />
+        </div>
+      </section>
+
+      {/* Services checklist image */}
+      <section className="py-12 bg-white">
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-10 items-center">
+            <div>
+              <h2 className="font-display text-2xl sm:text-3xl font-black text-foreground mb-4">
+                Why the REIQ Checklist Matters
+              </h2>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                The Real Estate Institute of Queensland (REIQ) publishes an
+                official end of lease cleaning checklist. This is the document
+                your property manager holds in their hand during your final
+                inspection. Every item that isn't ticked off is a potential bond
+                deduction.
+              </p>
+              <p className="text-muted-foreground leading-relaxed mb-4">
+                At Tru Bond Cleaning, we've trained our entire team to this
+                checklist. We don't use a generic cleaning guide — we use the
+                actual REIQ standard, because that's what stands between you and
+                losing part of your deposit.
+              </p>
+              <p className="text-muted-foreground leading-relaxed">
+                We've completed over 500 bond cleans in North Brisbane. That
+                experience means we know which items get missed most often, and
+                we make sure they never get missed on our jobs.
+              </p>
+              <div className="mt-6 grid grid-cols-1 sm:grid-cols-3 gap-4">
+                {[
+                  { icon: ShieldCheck, label: "Fully Insured" },
+                  { icon: CheckCircle2, label: "Bond Back Guarantee" },
+                  { icon: Star, label: "REIQ Trained" },
+                ].map(({ icon: Icon, label }) => (
+                  <div
+                    key={label}
+                    className="flex items-center gap-2 bg-secondary/30 rounded-xl px-4 py-3"
+                  >
+                    <Icon className="w-5 h-5 text-primary" />
+                    <span className="text-sm font-semibold text-foreground">
+                      {label}
+                    </span>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-card">
+              <img
+                src="/assets/generated/services-checklist.dim_800x500.jpg"
+                alt="Tru Bond Cleaning REIQ bond cleaning checklist with eco-friendly branded cleaning products ready for a North Brisbane rental property inspection"
+                className="w-full h-72 object-cover"
+                loading="lazy"
+                width={800}
+                height={500}
+              />
+            </div>
+          </div>
         </div>
       </section>
 
@@ -243,7 +322,7 @@ export default function Services() {
                     data-ocid={`services.primary_button.${i + 1}`}
                   >
                     <Link to="/contact">
-                      Book This Service <ArrowRight className="w-4 h-4 ml-2" />
+                      Book This Service <ArrowRight className="w-4 h-4 ml-1" />
                     </Link>
                   </Button>
                 </div>
@@ -253,26 +332,75 @@ export default function Services() {
         </div>
       </section>
 
+      {/* Why our services stand out */}
+      <section className="py-20 section-gradient">
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2 className="font-display text-3xl sm:text-4xl font-black text-foreground mb-6 text-center">
+            What Separates a Professional Bond Clean from a DIY Attempt
+          </h2>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+            {[
+              {
+                title: "Equipment That Actually Works",
+                desc: "We use industrial-grade vacuum cleaners, commercial hot water extraction carpet machines, professional degreasing chemicals, and window squeegee systems. These tools achieve results that consumer-grade equipment physically cannot.",
+              },
+              {
+                title: "Trained to the REIQ Standard",
+                desc: "Our team is specifically trained to the REIQ bond cleaning checklist. This isn't a general clean. We know exactly which items property managers inspect and we clean them to inspection standard, not just a visual standard.",
+              },
+              {
+                title: "Time and Efficiency",
+                desc: "A proper bond clean on a 3-bedroom house takes a full day of work. Most tenants underestimate this significantly. Our experienced team completes jobs efficiently without cutting corners, because we've done it hundreds of times.",
+              },
+              {
+                title: "Guaranteed Results",
+                desc: "If your property manager finds a problem with our work, we fix it for free within 48 hours. No DIY clean comes with a guarantee. This alone makes professional cleaning the lower-risk choice for protecting your bond.",
+              },
+            ].map((item) => (
+              <Card key={item.title} className="shadow-card">
+                <CardContent className="p-6">
+                  <h3 className="font-bold text-foreground mb-2">
+                    {item.title}
+                  </h3>
+                  <p className="text-muted-foreground text-sm leading-relaxed">
+                    {item.desc}
+                  </p>
+                </CardContent>
+              </Card>
+            ))}
+          </div>
+        </div>
+      </section>
+
       {/* CTA */}
-      <section
-        className="py-16 bg-primary text-primary-foreground"
-        data-ocid="cta.section"
-      >
+      <section className="py-16 bg-primary text-primary-foreground">
         <div className="container mx-auto px-4 text-center">
           <h2 className="font-display text-3xl font-black mb-4">
-            Book Your Bond Clean Today
+            Ready to Book Your Bond Clean?
           </h2>
           <p className="text-primary-foreground/80 mb-8">
-            Free quote. Fixed price. Bond back guarantee.
+            Free quote in minutes. No hidden fees. Bond back guarantee on every
+            job.
           </p>
-          <Button
-            asChild
-            size="lg"
-            className="bg-yellow-400 text-primary hover:bg-yellow-300 font-bold"
-            data-ocid="cta.primary_button"
-          >
-            <Link to="/contact">Get a Free Quote</Link>
-          </Button>
+          <div className="flex flex-wrap justify-center gap-4">
+            <Button
+              asChild
+              size="lg"
+              className="bg-yellow-400 text-primary hover:bg-yellow-300 font-bold"
+              data-ocid="services.primary_button"
+            >
+              <Link to="/contact">Get a Free Quote</Link>
+            </Button>
+            <Button
+              asChild
+              size="lg"
+              variant="outline"
+              className="border-white text-white hover:bg-white/10"
+              data-ocid="services.secondary_button"
+            >
+              <Link to="/about">About Our Team</Link>
+            </Button>
+          </div>
         </div>
       </section>
     </>

@@ -46,6 +46,31 @@ export default function SuburbPage() {
     document.title = suburb.metaTitle;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", suburb.metaDescription);
+    // OG tags
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement("meta");
+      (ogTitle as HTMLMetaElement).setAttribute("property", "og:title");
+      document.head.appendChild(ogTitle);
+    }
+    ogTitle.setAttribute("content", suburb.metaTitle);
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement("meta");
+      (ogDesc as HTMLMetaElement).setAttribute("property", "og:description");
+      document.head.appendChild(ogDesc);
+    }
+    ogDesc.setAttribute("content", suburb.metaDescription);
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      (canonical as HTMLLinkElement).setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute(
+      "href",
+      `https://trubondcleaningbrisbane.com/suburbs/${suburb.slug}`,
+    );
   }, [suburb]);
 
   if (!suburb) {
@@ -90,6 +115,8 @@ export default function SuburbPage() {
           alt={suburb.heroAlt}
           className="absolute inset-0 w-full h-full object-cover"
           fetchPriority="high"
+          width={800}
+          height={500}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="relative container mx-auto px-4 py-16">
@@ -171,13 +198,15 @@ export default function SuburbPage() {
                 </p>
               )}
 
-              {/* Interior image */}
+              {/* Interior image - branded with SEO alt text */}
               <div className="rounded-2xl overflow-hidden shadow-card my-8">
                 <img
                   src="/assets/generated/suburb-apartment-interior.dim_800x500.jpg"
                   alt={suburb.secondAlt}
                   className="w-full h-auto object-cover"
                   loading="lazy"
+                  width={800}
+                  height={500}
                 />
               </div>
 
@@ -198,6 +227,59 @@ export default function SuburbPage() {
                   {suburb.content[4]}
                 </p>
               )}
+
+              {/* Team photo with branded alt text */}
+              <div className="rounded-2xl overflow-hidden shadow-card my-8">
+                <img
+                  src="/assets/generated/about-team-photo.dim_800x500.jpg"
+                  alt={`Tru Bond Cleaning professional team in ${suburb.name} North Brisbane, fully equipped and ready to deliver a thorough bond clean`}
+                  className="w-full h-64 object-cover"
+                  loading="lazy"
+                  width={800}
+                  height={500}
+                />
+              </div>
+
+              {/* E-E-A-T trust section */}
+              <div className="bg-secondary/30 rounded-2xl p-6 mt-6">
+                <h2 className={sectionH2Class}>
+                  Our Experience in {suburb.name} — Why You Can Trust Us
+                </h2>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Tru Bond Cleaning has completed over 500 bond cleans across
+                  North Brisbane, including many properties in {suburb.name}. We
+                  know the standards that local property managers apply at final
+                  inspection. We know what gets flagged and what gets missed.
+                  And we use that knowledge on every job.
+                </p>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Every member of our team is police-checked and fully insured.
+                  We train to the REIQ bond cleaning standard — the same
+                  checklist your property manager uses. We bring all our own
+                  professional equipment and eco-friendly cleaning products.
+                </p>
+                <p className="text-muted-foreground leading-relaxed">
+                  Our bond back guarantee means if your property manager raises
+                  any concern after inspection, we return within 48 hours and
+                  fix it at no charge to you. We've honoured this guarantee on
+                  every job we've done in {suburb.name} and across North
+                  Brisbane.
+                </p>
+                <ul className="mt-4 space-y-2">
+                  {[
+                    "500+ bond cleans completed across North Brisbane",
+                    "98% bond return success rate",
+                    "Police-checked and fully insured team",
+                    "REIQ checklist followed on every job",
+                    "Bond back guarantee — honoured every time",
+                  ].map((item) => (
+                    <li key={item} className="flex items-center gap-2">
+                      <CheckCircle2 className="w-4 h-4 text-accent shrink-0" />
+                      <span className="text-sm text-foreground/80">{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
             </article>
 
             {/* Sidebar */}

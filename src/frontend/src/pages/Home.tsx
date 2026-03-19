@@ -18,6 +18,27 @@ function useMetaTags(title: string, description: string) {
     document.title = title;
     const metaDesc = document.querySelector('meta[name="description"]');
     if (metaDesc) metaDesc.setAttribute("content", description);
+    let ogTitle = document.querySelector('meta[property="og:title"]');
+    if (!ogTitle) {
+      ogTitle = document.createElement("meta");
+      (ogTitle as HTMLMetaElement).setAttribute("property", "og:title");
+      document.head.appendChild(ogTitle);
+    }
+    ogTitle.setAttribute("content", title);
+    let ogDesc = document.querySelector('meta[property="og:description"]');
+    if (!ogDesc) {
+      ogDesc = document.createElement("meta");
+      (ogDesc as HTMLMetaElement).setAttribute("property", "og:description");
+      document.head.appendChild(ogDesc);
+    }
+    ogDesc.setAttribute("content", description);
+    let canonical = document.querySelector('link[rel="canonical"]');
+    if (!canonical) {
+      canonical = document.createElement("link");
+      (canonical as HTMLLinkElement).setAttribute("rel", "canonical");
+      document.head.appendChild(canonical);
+    }
+    canonical.setAttribute("href", "https://trubondcleaningbrisbane.com/");
   }, [title, description]);
 }
 
@@ -26,25 +47,25 @@ const services = [
     title: "Bond Cleaning",
     desc: "Full end of lease clean following the REIQ checklist. Every room, every surface.",
     img: "/assets/generated/service-end-of-lease.dim_600x400.jpg",
-    alt: "Professional bond cleaners doing end of lease clean in North Brisbane rental property",
+    alt: "Professional bond cleaners completing end of lease clean in a North Brisbane rental property",
   },
   {
     title: "Carpet Steam Cleaning",
     desc: "Industrial hot water extraction removes deep dirt, stains, and odours from all carpet types.",
-    img: "/assets/generated/service-carpet-cleaning.dim_600x400.jpg",
-    alt: "Professional carpet steam cleaning in North Brisbane home",
+    img: "/assets/generated/service-carpet-steam.dim_600x400.jpg",
+    alt: "Tru Bond Cleaning professional steam cleaning carpet using industrial hot water extraction in a North Brisbane rental home",
   },
   {
     title: "Oven & Kitchen Deep Clean",
     desc: "We deep clean ovens, rangehoods, stovetops, cupboards, and benchtops to inspection standard.",
-    img: "/assets/generated/service-oven-cleaning.dim_600x400.jpg",
-    alt: "Deep cleaned sparkling oven in Brisbane rental property kitchen",
+    img: "/assets/generated/service-kitchen-clean.dim_600x400.jpg",
+    alt: "Sparkling clean oven and kitchen after professional deep clean by Tru Bond Cleaning North Brisbane",
   },
   {
     title: "Window Cleaning",
     desc: "Streak-free windows inside and out, including frames, sills, and tracks.",
     img: "/assets/generated/service-window-cleaning.dim_600x400.jpg",
-    alt: "Professional window cleaning service North Brisbane house exterior",
+    alt: "Professional window cleaning leaving streak-free glass on a North Brisbane rental property",
   },
 ];
 
@@ -116,15 +137,15 @@ const faqs = [
   },
   {
     id: "faq-12",
-    q: "How much is an end of lease clean in Australia? How much to pay a cleaner for 3 hours? What is the 20 minute rule in cleaning?",
-    a: "End of lease cleaning costs in Australia range from $200 for a small studio to over $1,000 for a large house. The average for a 3-bedroom house is around $400 to $600. For a 3-hour clean from a general cleaner, you would typically pay $105 to $165 based on Brisbane rates ($35 to $55 per hour). The 20-minute rule in cleaning is a popular productivity tip — the idea is to focus on one area for just 20 minutes at a time. It makes cleaning feel less overwhelming and keeps you moving through the house systematically. However, for a bond clean, you need much more than 20-minute bursts — a full professional bond clean of a 3-bedroom house typically takes 6 to 10 hours with a team of 2 to 3 cleaners.",
+    q: "How much is an end of lease clean in Australia?",
+    a: "End of lease cleaning costs in Australia range from $200 for a small studio to over $1,000 for a large house. The average for a 3-bedroom house is around $400 to $600. For a 3-hour clean from a general cleaner, you would typically pay $105 to $165 based on Brisbane rates ($35 to $55 per hour). A full professional bond clean of a 3-bedroom house typically takes 6 to 10 hours with a team of 2 to 3 cleaners.",
   },
 ];
 
 export default function Home() {
   useMetaTags(
-    "Tru Bond Cleaning North Brisbane | Bond Back Guarantee",
-    "Tru Bond Cleaning North Brisbane offers professional bond cleaning, end of lease cleaning, carpet steam cleaning, and oven cleaning with a bond back guarantee. Serving Chermside, Aspley, Bridgeman Downs and all North Brisbane suburbs.",
+    "Bond Cleaning North Brisbane | Tru Bond Cleaning | Bond Back Guarantee",
+    "Professional bond cleaning in North Brisbane with a bond back guarantee. REIQ checklist, police-checked team, eco-friendly products. Serving Chermside, Aspley, Bridgeman Downs & all North Brisbane suburbs. Free quote today.",
   );
 
   return (
@@ -132,14 +153,16 @@ export default function Home() {
       {/* HERO */}
       <section
         className="relative min-h-[580px] flex items-center"
-        aria-label="Hero section"
+        aria-label="Bond cleaning North Brisbane hero"
         data-ocid="hero.section"
       >
         <img
           src="/assets/generated/hero-bond-cleaning.dim_1200x600.jpg"
-          alt="Tru Bond Cleaning North Brisbane team cleaning a modern apartment for bond return"
+          alt="Tru Bond Cleaning North Brisbane team professionally cleaning a modern rental apartment for bond return guarantee"
           className="absolute inset-0 w-full h-full object-cover"
           fetchPriority="high"
+          width={1200}
+          height={600}
         />
         <div className="absolute inset-0 hero-gradient" />
         <div className="relative container mx-auto px-4 py-20">
@@ -245,14 +268,94 @@ export default function Home() {
         </div>
       </section>
 
-      {/* WHY CHOOSE US */}
+      {/* BEFORE / AFTER PROOF */}
       <section
         className="py-20 section-gradient"
+        aria-labelledby="proof-heading"
+      >
+        <div className="container mx-auto px-4">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <span className="inline-block bg-secondary text-secondary-foreground text-xs font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-4">
+                Real Results
+              </span>
+              <h2
+                id="proof-heading"
+                className="font-display text-3xl sm:text-4xl font-black text-foreground mb-6"
+              >
+                We Don't Just Clean. We Transform.
+              </h2>
+              <div className="space-y-4 text-muted-foreground leading-relaxed">
+                <p>
+                  There's a big difference between a clean that <em>looks</em>{" "}
+                  done and a clean that <em>passes inspection</em>. Property
+                  managers are trained to spot the difference. We are too — and
+                  we clean to inspection standard, not just visual standard.
+                </p>
+                <p>
+                  We've completed over 500 bond cleans across North Brisbane.
+                  That means we've cleaned hundreds of ovens, thousands of
+                  square metres of carpet, and more shower screens than we can
+                  count. We've seen what gets flagged at inspections, and we
+                  make sure those exact items are never missed on our jobs.
+                </p>
+                <p>
+                  Our bond back guarantee isn't just a marketing line. It's a
+                  commitment we've backed up on every single job we've done.
+                </p>
+              </div>
+              <div className="mt-6 grid grid-cols-3 gap-4 text-center">
+                {[
+                  { value: "500+", label: "Bond Cleans" },
+                  { value: "98%", label: "Bond Back Rate" },
+                  { value: "5★", label: "Avg. Rating" },
+                ].map((stat) => (
+                  <div
+                    key={stat.label}
+                    className="bg-white rounded-xl p-4 shadow-card"
+                  >
+                    <p className="font-display text-2xl font-black text-primary">
+                      {stat.value}
+                    </p>
+                    <p className="text-xs text-muted-foreground mt-1">
+                      {stat.label}
+                    </p>
+                  </div>
+                ))}
+              </div>
+            </div>
+            <div className="rounded-2xl overflow-hidden shadow-hero">
+              <img
+                src="/assets/generated/home-before-after.dim_800x400.jpg"
+                alt="Before and after bond cleaning by Tru Bond Cleaning North Brisbane: left side shows dirty bathroom, right side shows sparkling clean bathroom ready for rental inspection"
+                className="w-full h-auto object-cover"
+                loading="lazy"
+                width={800}
+                height={400}
+              />
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* WHY CHOOSE US */}
+      <section
+        className="py-20 bg-white"
         aria-labelledby="why-heading"
         data-ocid="why.section"
       >
         <div className="container mx-auto px-4">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div className="rounded-2xl overflow-hidden shadow-hero">
+              <img
+                src="/assets/generated/about-team-photo.dim_800x500.jpg"
+                alt="Tru Bond Cleaning professional team in navy uniforms ready to service a North Brisbane rental property for bond clean"
+                className="w-full h-full object-cover"
+                loading="lazy"
+                width={800}
+                height={500}
+              />
+            </div>
             <div>
               <h2
                 id="why-heading"
@@ -296,13 +399,144 @@ export default function Home() {
                 </Button>
               </div>
             </div>
-            <div className="rounded-2xl overflow-hidden shadow-hero">
-              <img
-                src="/assets/generated/service-end-of-lease.dim_600x400.jpg"
-                alt="Tru Bond Cleaning professional cleaner at work in North Brisbane rental"
-                className="w-full h-full object-cover"
-                loading="lazy"
-              />
+          </div>
+        </div>
+      </section>
+
+      {/* E-E-A-T CONTENT SECTION */}
+      <section
+        className="py-20 section-gradient"
+        aria-labelledby="eeat-heading"
+      >
+        <div className="container mx-auto px-4 max-w-4xl">
+          <h2
+            id="eeat-heading"
+            className="font-display text-3xl sm:text-4xl font-black text-foreground mb-8 text-center"
+          >
+            Everything You Need to Know About Bond Cleaning in North Brisbane
+          </h2>
+
+          <div className="space-y-10 text-muted-foreground leading-relaxed">
+            <div>
+              <h3 className="font-display text-xl font-black text-foreground mb-3">
+                What Is Bond Cleaning?
+              </h3>
+              <p>
+                Bond cleaning — also called end of lease cleaning or exit
+                cleaning — is a thorough, professional clean of a rental
+                property when a tenant moves out. It's not the same as a regular
+                clean. A bond clean covers every inch of the property to the
+                standard required by Queensland property managers. This includes
+                the oven, rangehood, all kitchen cupboards, bathroom tiles,
+                shower screens, carpet, windows, skirting boards, ceiling fans,
+                laundry, and garage.
+              </p>
+              <p className="mt-3">
+                In Queensland, tenants are legally required to return the rental
+                property in the same condition as when they moved in (fair wear
+                and tear excluded). If the property isn't clean enough, the
+                property manager can lodge a claim against your bond with the
+                Residential Tenancies Authority (RTA). Bond amounts in North
+                Brisbane are typically four weeks' rent — which means thousands
+                of dollars are at stake.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-black text-foreground mb-3">
+                What's Included in a Professional Bond Clean?
+              </h3>
+              <p className="mb-3">
+                A full professional bond clean covers every area of the
+                property. At Tru Bond Cleaning, we follow the REIQ checklist
+                item by item:
+              </p>
+              <ul className="space-y-2">
+                {[
+                  "Kitchen: oven (inside and out), rangehood and filters, all cupboards (interior and exterior), stovetop, benchtops, splashback, sink and taps, dishwasher exterior",
+                  "Bathrooms: toilet (full disassembly and clean), shower screens (soap scum and mould removed), tiles and grout, vanity, mirrors, exhaust fans",
+                  "Bedrooms and living areas: ceiling fans, light fittings, wall spot cleaning, windowsills, blinds",
+                  "Floors: all areas vacuumed and mopped, including under furniture",
+                  "Windows: glass cleaned inside and out, frames, sills, and tracks",
+                  "Laundry: trough, shelving, washing machine area",
+                  "Garage: swept, wiped, cobwebs removed",
+                  "Walls and skirting boards: all marks and scuffs removed",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-black text-foreground mb-3">
+                How Long Does a Bond Clean Take?
+              </h3>
+              <p>
+                A proper bond clean takes significantly longer than a standard
+                clean. For a 2-bedroom unit, expect 4 to 6 hours. A 3-bedroom
+                house typically takes 6 to 10 hours with a team of two or three
+                cleaners. Larger homes with multiple bathrooms and large outdoor
+                areas can take longer. We never rush a bond clean — the job is
+                done when every item on the checklist is complete.
+              </p>
+              <p className="mt-3">
+                This is one of the main reasons a professional team is more
+                reliable than a DIY approach. Most tenants underestimate how
+                long a thorough bond clean takes, especially when tackling the
+                oven, carpet, and windows for the first time with limited
+                equipment.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-black text-foreground mb-3">
+                Why Choose a Local North Brisbane Bond Cleaner?
+              </h3>
+              <p>
+                Choosing a local North Brisbane bond cleaner means working with
+                a team that knows the area, knows the property managers, and
+                understands the standards expected in your suburb. Property
+                managers in Chermside, Aspley, Bridgeman Downs, and North Lakes
+                all have different expectations and inspection approaches. Local
+                experience means we anticipate what will be checked and make
+                sure it's done properly.
+              </p>
+              <p className="mt-3">
+                Tru Bond Cleaning is based in North Brisbane. We're not a
+                national franchise. We're a local team that genuinely cares
+                about our community — which is why we back every job with our
+                bond back guarantee and have maintained a 98% bond return rate
+                across more than 500 cleans.
+              </p>
+            </div>
+
+            <div>
+              <h3 className="font-display text-xl font-black text-foreground mb-3">
+                The Tru Bond Cleaning Difference
+              </h3>
+              <p>
+                There are many bond cleaners in Brisbane. Here's what sets Tru
+                Bond Cleaning apart:
+              </p>
+              <ul className="mt-3 space-y-2">
+                {[
+                  "We follow the official REIQ bond cleaning checklist — not a generic guide",
+                  "Every cleaner is police-checked and fully insured before their first job",
+                  "We use professional-grade equipment including industrial carpet machines and streak-free window systems",
+                  "We use eco-friendly, biodegradable cleaning products that are safe for children and pets",
+                  "We offer a written bond back guarantee on every job",
+                  "We've completed over 500 bond cleans in North Brisbane suburbs",
+                  "We are locally owned and operated — this is our community",
+                ].map((item) => (
+                  <li key={item} className="flex items-start gap-3">
+                    <CheckCircle2 className="w-4 h-4 text-accent shrink-0 mt-1" />
+                    <span className="text-sm">{item}</span>
+                  </li>
+                ))}
+              </ul>
             </div>
           </div>
         </div>
